@@ -2,25 +2,25 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Tecnico } from 'src/app/models/tecnico';
-import { TecnicoService } from 'src/app/services/tecnico.service';
- 
-@Component({
-  selector: 'app-tecnico-read',
-  templateUrl: './tecnico-read.component.html',
-  styleUrls: ['./tecnico-read.component.css']
-})
-export class TecnicoReadComponent implements AfterViewInit {
+import { Cliente } from 'src/app/models/cliente';
+import { ClienteService } from 'src/app/services/cliente.service';
 
-  tecnicos: Tecnico[] = [];
+@Component({
+  selector: 'app-cliente-read',
+  templateUrl: './cliente-read.component.html',
+  styleUrls: ['./cliente-read.component.css']
+})
+export class ClienteReadComponent implements AfterViewInit {
+
+  clientes: Cliente[] = [];
 
   displayedColumns: string[] = ['id', 'nome', 'cpf', 'telefone', 'action'];
-  dataSource = new MatTableDataSource<Tecnico>(this.tecnicos);
+  dataSource = new MatTableDataSource<Cliente>(this.clientes);
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   
   constructor(
-    private service : TecnicoService,
+    private service : ClienteService,
     private router : Router) {}
   
   ngAfterViewInit() {
@@ -29,14 +29,14 @@ export class TecnicoReadComponent implements AfterViewInit {
   
   findAll():void {
     this.service.findAll().subscribe((resposta) => {
-      this.tecnicos = resposta;
-      this.dataSource = new MatTableDataSource<Tecnico>(this.tecnicos);
+      this.clientes = resposta;
+      this.dataSource = new MatTableDataSource<Cliente>(this.clientes);
       this.dataSource.paginator = this.paginator;
     })
   }
 
   navigateToCreate():void {
-    this.router.navigate(['tecnicos/create'])
+    this.router.navigate(['clientes/create'])
   }
 }
 
