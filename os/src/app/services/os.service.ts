@@ -32,8 +32,8 @@ export class OsService {
   }
 
   update(os: OS):Observable<OS> {
-    /* ou: const url = this.baseUrl + "/os/" + os.id;*/
-    const url = `${this.baseUrl}/os/${os.id}`;
+    /* ou: const url = this.baseUrl + "/os"; a gente fez sem o id na rota pra mostrar q da pra fz diferente*/
+    const url = `${this.baseUrl}/os}`;
     return this.http.put<OS>(url, os);
   }
 
